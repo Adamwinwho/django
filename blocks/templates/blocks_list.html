@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	  <title>Python部落论坛</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="jumbotron">
+			<h1><center>Python部落论坛</center></h1>
+		  </div>
+	      {% for b in blocks %}
+	      <div class="blockitem">
+            <div class="panel panel-default">
+		      <div class="panel-heading">
+			    <a>{{b.name}}</a>
+				<span class="pull-right">{{b.owner.username}}</span>
+			  </div>
+			  <div class="panel-body">
+			    {{b.desc}}
+			  </div>
+		    </div>
+	      </div>
+	      {% endfor %}
+		</div>
+	  </div>
+    </div>
+  </body>
+</html>
