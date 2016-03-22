@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div >
+  <ol class="breadcrumb">
+	  <li><a href={% url "blocks_list" %}>首页</a></li>
+	  <li class="active">{{block.name}}</li>
+  </ol>
+</div>
+{% endblock %}

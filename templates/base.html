@@ -12,20 +12,10 @@
 		  <div class="jumbotron">
 			<h1><center>Python部落论坛</center></h1>
 		  </div>
-	      {% for b in blocks %}
-	      <div class="blockitem">
-            <div class="panel panel-default">
-		      <div class="panel-heading">
-                  <a href={% url "article_list" b.id %}>{{b.name}}</a>
-				<span class="pull-right">管理员:{{b.owner.username}}</span>
-			  </div>
-			  <div class="panel-body">
-			    {{b.desc}}
-			  </div>
-		    </div>
-	      </div>
-	      {% endfor %}
 		</div>
+	  </div>
+	  <div class="row">
+		{% block content %} {% endblock %}
 	  </div>
     </div>
   </body>
