@@ -12,3 +12,9 @@ def article_list(request,block_id):
     articles = Article.objects.filter(block=block).order_by("-last_update_timestamp")
 
     return render_to_response("article_list.html",{"articles":articles,"block":block})
+
+def article_detail(request,article_id):
+    article_id = int(article_id)
+    article = Article.objects.get(id=article_id)
+
+    return render_to_response("article_detail.html",{'article':article})
