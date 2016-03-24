@@ -3,8 +3,10 @@
 <div >
   <ol class="breadcrumb">
 	<li><a href={% url "blocks_list" %}>首页</a></li>
-	<li class="active">{{block.name}}</li>
+	<li class="active">{{b.name}}</li>
   </ol>
+  <a class="btn btn-primary" href={% url "article_create" b.id %} role="button">发表文章</a>
+  <br/><br/>
   <table class="table table-bordered">
 	<tr>
 		<th>状态</th>
