@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="col-sm-12">
+  <ol class="breadcrumb">
+	<li><a href={% url "blocks_list" %}>首页</a></li>
+	<li><a href={% url "article_list" b.id %}>{{b.name}}</a></li>
+	<li class="active">发表文章</li>
+  </ol>
+  {% if messages %}
+    {% for message in messages %}
+	  <div class="alert alert-info">{{message}}</div>
+	{% endfor %}
+  {% endif %}
   <form method="POST" action="" class="form-horizontal">{% csrf_token %}
     <div class="form-group">
       <label for="inputtitle" class="col-sm-2 col-md-1 control-label">标题</label>
@@ -19,4 +30,5 @@
       </div>
     </div>
   </form>
+</div>
 {% endblock %}
