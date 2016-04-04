@@ -18,7 +18,9 @@ from django.contrib import admin
 
 admin.autodiscover()
 urlpatterns = [
+    url(r'^accounts/',include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$','blocks.views.blocks_list',name="blocks_list"),
-    url(r'^articles/',include("articles.urls"))
+    url(r'^articles/',include("articles.urls")),
+    url(r'^usercenter/',include("usercenter.urls"))
 ]

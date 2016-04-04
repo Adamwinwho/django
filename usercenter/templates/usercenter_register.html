@@ -1,0 +1,53 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+  {% if errors %}
+	<div class="alert alert-warning">{{errors}}</div>
+  {% endif %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    &nbsp;
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <b>注册</b>
+      </div>
+      <div class="panel-body">
+        <form method="POST" action="{% url "usercenter_register" %}">{% csrf_token %}
+          <div class="input-group">
+            <span class="input-group-addon">用户名</span>
+            <input id="id_username" maxlength="254" name="username" type="text" class="form-control"/>
+          </div>
+          <br />
+          <div class="input-group">
+            <span class="input-group-addon">邮箱</span>
+            <input id="id_email" maxlength="254" name="email" type="text" class="form-control"/>
+          </div>
+          <br />
+           <div class="input-group">
+            <span class="input-group-addon">密码</span>
+            <input id="id_password" maxlength="254" name="password" type="password" class="form-control"/>
+          </div>
+          <br />
+           <div class="input-group">
+            <span class="input-group-addon">确认密码</span>
+            <input id="id_repassword" maxlength="254" name="re_password" type="password" class="form-control"/>
+          </div>
+          <br />
+          <div class="input-group">
+            <button type="submit" class="btn btn-primary">注册</button>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <a href={% url "login" %}>已有用户名?马上去登陆...</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

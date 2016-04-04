@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <div>
+  <div class="col-sm-12">
     <ol class="breadcrumb">
       <li><a href={% url "blocks_list" %}>首页</a></li>
       <li><a href={% url "article_list" article.block.id %}>{{article.block}}</a></li>
