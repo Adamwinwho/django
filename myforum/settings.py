@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -116,12 +117,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-EMAIL_HOST="smtp.qq.com"
-EMAIL_PORT=465
-EMAIL_HOST_USER="930991185@qq.com"
-EMAIL_HOST_PASSWORD="xxxxxx"
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
