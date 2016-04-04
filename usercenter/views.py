@@ -26,12 +26,12 @@ def register(request):
             error = u"任何字段均不能为空"
         if password != re_password:
             error = u'两次密码不一致'
-        if User.objects.filter(username=username).count > 0:
+        if User.objects.filter(username=username).count() > 0:
             error = u"用户名已存在"
 
         if not error:
-            user = User.objects.creat_user(username=username,email=email,password=password)
-            user.is_active = false
+            user = User.objects.create_user(username=username,email=email,password=password)
+            user.is_active = False
             user.save()
 
             #获取32位随机码
@@ -39,7 +39,7 @@ def register(request):
             #设置过期时间
             expire_time = datetime.datetime.now()+datetime.timedelta(days=1)
             code_record = ActivateCode(owner=user,code=new_code,expire_timestamp=expire_time)
-            code_recode.save()
+            code_record.save()
             activate_link = "http://%s%s" % (request.get_host(),reverse('usercenter_activate',args=[new_code]))
             send_mail(u'[Python部落论坛]激活邮件',u'您的激活链接为：%s' % activate_link,'1137048513@qq.com',[email],fail_silently=False)
         else:
