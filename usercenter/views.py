@@ -22,7 +22,7 @@ def register(request):
         password = request.POST['password'].strip()
         re_password = request.POST['re_password'].strip()
 
-        if not username or not email or not email or not re_password:
+        if not username or not email or not password or not re_password:
             error = u"任何字段均不能为空"
         if password != re_password:
             error = u'两次密码不一致'
