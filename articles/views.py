@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #block_id是从urls.py中取得,是字符串类型
@@ -22,6 +23,8 @@ def article_detail(request,article_id):
 
     return render_to_response("article_detail.html",{'article':article})
 
+#发表文章前必须登陆
+@login_required
 def article_create(request,block_id):
     block_id = int(block_id)
     block = Blocks.objects.get(id=block_id)
