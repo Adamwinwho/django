@@ -37,8 +37,8 @@ def article_create(request,block_id):
         if not title or not content:
             messages.add_message(request,messages.ERROR,u'标题和内容均不能为空')
             return render_to_response('article_create.html',{'b':block,'title':title,'content':content},context_instance=RequestContext(request))
-        owner = User.objects.all()[0] #TODO:
-        new_article = Article(block=block,owner=owner,title=title,content=content)
+        #owner = User.objects.all()[0] #TODO:
+        new_article = Article(block=block,owner=request.user,title=title,content=content)
         new_article.save()
         messages.add_message(request,messages.INFO,u'成功发表文章')
         return redirect(reverse("article_list",args=[block.id]))

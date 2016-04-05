@@ -5,4 +5,4 @@ from models import Blocks
 
 def blocks_list(request):
     blocks = Blocks.objects.all().order_by("-id")
-    return render_to_response("blocks_list.html",{"blocks":blocks})
+    return render_to_response("blocks_list.html",{"blocks":blocks,"user":request.user})
