@@ -119,6 +119,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
+
 #登陆成功以后，定向到首页
 LOGIN_REDIRECT_URL='/'
 # Static files (CSS, JavaScript, Images)

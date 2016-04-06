@@ -28,6 +28,8 @@ def register(request):
             error = u'两次密码不一致'
         if User.objects.filter(username=username).count() > 0:
             error = u"用户名已存在"
+        if User.objects.filter(email=email).count() > 0:
+            error = u"该邮箱已被注册"
 
         if not error:
             user = User.objects.create_user(username=username,email=email,password=password)
