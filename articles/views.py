@@ -13,7 +13,7 @@ from django.core.paginator import Paginator
 #block_id是从urls.py中取得,是字符串类型
 def article_list(request,block_id):
     block_id = int(block_id)
-    page_no = int(request.GET.get("page_no",1))
+    page_no = int(request.GET.get("page_no",'1'))
     block = Blocks.objects.get(id=block_id)
     articles = Article.objects.filter(block=block).order_by("-last_update_timestamp")
 
@@ -23,7 +23,7 @@ def article_list(request,block_id):
         page_no = p.num_pages
     if page_no < 1:
         page_no = 1
-    page_links = [i for i in range(page_no-5,page_no+6) if i>0 and i<p.num_pages]
+    page_links = [i for i in range(page_no-5,page_no+6) if i>0 and i<=p.num_pages]
     page = p.page(page_no)
     previous_link = page_links[0]-1
     next_link = page_links[-1]+1
