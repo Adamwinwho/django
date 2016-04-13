@@ -1,0 +1,7 @@
+这是一个通用模版，用来显示翻页效果，可以供其它模块使用
+使用方法：
+    在要使用的地方添加：
+    {% include "xxx.html" %}  在当前位置引入模版
+    {% include "component/paginator.html" with param_name="page_no" %} 增加一个param_name参数
+	参数的使用和模版中其它变量一样
+    {{ param_name }}
