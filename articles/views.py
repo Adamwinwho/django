@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from comment.models import Comment
+from utils.paginator import paginator_queryset
 # Create your views here.
 
 #block_id是从urls.py中取得,是字符串类型
@@ -31,10 +33,12 @@ def article_list(request,block_id):
     return render_to_response("article_list.html",{"articles":page.object_list,"b":block,"has_previous":previous_link>0,"has_next":next_link<=p.num_pages,"previous_link":previous_link,"next_link":next_link,"page_cnt":p.num_pages,"current_no":page_no,"page_links":page_links},context_instance=RequestContext(request))
 
 def article_detail(request,article_id):
+    page_no = int(request.GET.get("comment_page_no","1"))
     article_id = int(article_id)
     article = Article.objects.get(id=article_id)
-
-    return render_to_response("article_detail.html",{'article':article})
+    comments = Comment.objects.filter(article=article,status=0) 
+    comments,pagination_data = paginator_queryset(comments,page_no,cnt_per_page=3)
+    return render_to_response("article_detail.html",{'article':article,"comments":comments,"pagination":pagination_data},context_instance=RequestContext(request))
 
 #发表文章前必须登陆
 @login_required

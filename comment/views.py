@@ -7,7 +7,7 @@ from utils.response import json_response
 # Create your views here.
 @login_required
 def comment_create(request):
-    article_id = int(request.POST["article.id"])
+    article_id = int(request.POST["article_id"])
     to_comment_id = int(request.POST["to_comment_id"])
     content = request.POST["content"].strip()
 

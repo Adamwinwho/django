@@ -8,7 +8,7 @@ from blocks.models import Blocks
 
 # Create your models here.
 
-class comment(models.Model):
+class Comment(models.Model):
     #评论所属的板块,优点是直接可以查看所属板块的评论
     block = models.ForeignKey(Blocks,verbose_name=u"所属板块")
     #评论所属的文章,其实通过这个是可以获取到所属板块的
