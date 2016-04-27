@@ -23,13 +23,23 @@
 		</td>
 	  </tr>
 	  {% for comment in comments %}
-	  <tr>
+	  <tr {% if forloop.last %} id="lastComment" {% endif %}>
 		<td class="author">
-		  <center>作者:{{comment.owner}}</center>
+		  <center>作者:{{comment.owner.username}}</center>
 		</td>
 		<td class="content">
+		  {% with comment.to_comment as to_comment %}
+		  {% if to_comment %}
+		    <blockquote>
+			  <b>{{to_comment.owner.username}}:</b>
+			  <br />
+			  {{to_comment.content | linebreaksbr}}
+			</blockquote>
+		  {% endif %}
           <h6>发表于：{{ comment.create_timestamp|date:"Y-m-d P" }}</h6>
+		  <a href="#commentContent" class="btn btn-primary pull-right subCommentBtn" data-comment-id="{{comment.id}}" data-owner="{{comment.owner.username}}">回复</a>
           <div> {{ comment.content|linebreaksbr }} </div>
+		  {% endwith %}
 		</td>
 	  </tr>
 	  {% endfor %}
@@ -43,7 +53,7 @@
           <center>作者：{{ user.username }}<center>
         </td>
         <td class="content">
-          <textarea class="form-control" id="commentContent" rows="3"></textarea>
+			<textarea class="form-control" id="commentContent" rows="3"></textarea>
           <br />
           <button class="btn btn-primary" id="commentBtn">发表评论</button>
           <br />
@@ -58,6 +68,9 @@
 <script type="text/javascript" src="/static/lib/jquery/jquery.csrf.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+  if(window.location.href.indexOf("goLast")>0){
+	  window.location.href=window.location.href+"#lastComment";
+  }
   var article_id = {{ article.id }};
   var page_cnt = {{ pagination.page_cnt }};
   var to_comment_id = 0;
@@ -68,8 +81,15 @@ $(document).ready(function () {
     $.post("{% url 'comment_create' %}", param, function () {
       $("#commentContent").val("");
       to_comment_id = 0;
-      window.location.href = "{% url 'article_detail' article.id %}?comment_page_no=" + (page_cnt + 1);
+      window.location.href = "{% url 'article_detail' article.id %}?comment_page_no=" + (page_cnt + 1)+"&goLast=1";
     });
+  })
+  $(".subCommentBtn").click(function(e){
+	  var btn = $(e.target);
+	  to_comment_id = parseInt(btn.attr("data-comment-id"));
+	  $("#commentContent").attr("placeholder","回复:"+btn.attr("data-owner"));
+	  $("#commentContent").focus();
+	  return false;
   })
 });
 </script>
