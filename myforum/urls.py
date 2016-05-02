@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$','blocks.views.blocks_list',name="blocks_list"),
     url(r'^articles/',include("articles.urls")),
     url(r'^usercenter/',include("usercenter.urls")),
-    url(r'^comment/',include("comment.urls"))
+    url(r'^comment/',include("comment.urls")),
+    url(r'^message/',include("message.urls"))
 ]
